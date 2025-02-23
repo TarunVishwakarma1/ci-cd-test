@@ -22,7 +22,9 @@ jobs:
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
           script: |
-            whoami
-            pwd
-            ls -la
-            echo "Deploying..."
+            cd ci-cd-test
+            git pull
+            bun install
+            bun run build
+            pm2 restart all
+            echo "Deployed successfully"
