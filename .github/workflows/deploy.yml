@@ -21,4 +21,10 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
-          script: ./deploy.sh
+          script: |
+            cd ci-cd-test
+            git pull
+            bun install
+            bun run build
+            pm2 restart all
+            echo "Deployed successfully"
